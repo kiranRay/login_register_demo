@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <body>
+            <div class="container">
+                <form action="http://localhost:3000/app/login" method="POST">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email" class="form-control" required><br>
+                    <label for="pass">Password</label>
+                    <input type="password" name="pass" id="pass" class="form-control" required> <br>
+                    <input type="submit" value="Login">
+                    <span>or</span>              
+                <a href="http://localhost:3000/app/register" ><input type="button" value="Register"></a>
+                </form>
+                <% if(error){ %> 
+                    <ul>
+                        <li> <%= error.details[0].message %> </li>
+                    <% } %>
+                    </ul>
+                    <% if(msg){ %> 
+                        <ul>
+                            <li> <%= msg %> </li>
+                        <% } %>
+                        </ul>
+            </div>
+        </body>
+    </head>
+</html>

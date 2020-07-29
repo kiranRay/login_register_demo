@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>home</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <body>
+            <div class="container"> 
+                <form class="float-right mt-2" action="http://localhost:3000/app/logout" method="GET">
+                    <button type="submit">Logout</button>
+                </form>
+                <div  class="d-inline-flex p-4">Welcome <%= mail%> </div>
+                <div >
+                <label >You are child user </label>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>E-mail</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="tbody1">
+                        <tr>
+                            <td colspan="3">No data available</td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            <div id="err"> </div>
+            </div>
+        </body>
+    </head>
+</html>
+<script>
+    $.ajax({
+            url:'http://localhost:3000/app/parentinvited',
+            success:function(result){
+                var tblBody;
+                var no=1;
+                flag=1
+                $.each(result,function(k,v){  
+                    tblBody+= `<tr>
+                                <td>${no}</td>
+                                <td>${v.child}</td>
+                            </tr>`
+                $("#tbody1").html(tblBody); 
+                no++;  
+                })              
+            }
+        })
+</script>

@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>home</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <body>
+            <div class="container"> 
+                <form class="float-right mt-2" action="http://localhost:3000/app/logout" method="GET">
+                    <button type="submit">Logout</button>
+                </form>
+                <div  class="d-inline-flex p-4">Welcome <%= mail%> </div>
+                <div >
+                <label >Invite Other Users:   </label>
+                <a href="http://localhost:3000/app/invite">Invite</a> 
+                </div>
+            <div id="err"> </div>
+            </div>
+        </body>
+    </head>
+</html>

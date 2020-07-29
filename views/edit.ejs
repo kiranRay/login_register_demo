@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>home</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <body>
+            <div class="container"> 
+               
+                <div class="d-inline-flex p-4">
+                <form >
+                <label for="umail"></label>
+                <input type="email" id="umail" value="<%=data%>" name="uemail" required>
+                <button type="submit" id="save" >Submit</button>
+              </form>
+                <% if(msg){ %> 
+                  <ul>
+                      <li> <%= msg %> </li>
+                  <% } %>
+               </ul>
+                  <% if(error){ %> 
+                      <ul>
+                          <li> <%= error.details[0].message %> </li>
+                      <% } %>
+                      </ul>
+                </div>
+            </div>
+        </body>
+    </head>
+</html>
+<script>
+  
+ $('form').submit(function( event ) { 
+   
+   event.preventDefault();
+   let va=$('#umail').val();
+   let orignal="<%=data%>"
+   if(va==orignal){
+    $.ajax({
+    url:"http://localhost:3000/app/invite" ,
+    type:'get',
+    success:function(result){
+      console.log("inner edir ajax.....");
+      $('body').html(result);
+    }
+
+  })
+
+    }else{
+      let id="<%=id%>";
+  $.ajax({
+    url:"http://localhost:3000/app/edit" ,
+    type:'post',
+    data:{id,va},
+    success:function(result){
+      console.log("inner edir ajax.....");
+      $('body').html(result);
+    }
+
+  })
+    }
+   
+  })
+  
+</script>
+
