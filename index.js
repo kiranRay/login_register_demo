@@ -1,7 +1,7 @@
 const parser = require('body-parser');
 const{ pool } = require('./models/db');
 // var session = require('express-session');
-const express=require('express');
+// const express=require('express');
 const app = new express();
 const register = require('./routes/register');
 
