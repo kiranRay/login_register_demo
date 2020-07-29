@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <title>form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <body> 
+            <table class="table table-bordered">
+                <tbody id="tbody">
+                    <tr>
+                        <td>ID</td>
+                        <td>Name</td>
+                    </tr>
+
+                </tbody>
+            </table>
+    </body>
+</head>
+</html>
+<script> 
+    function myfun(){
+        $.ajax({
+         url: "http://localhost:3000/api/students",
+         type: 'GET',
+         success: function(result) {
+            var tblBody1;
+              $.each(result,function(k,v){
+                tblBody1 += `<tr>
+                                  <td >${v.id}</td>
+                                  <td>${v.name}</td>
+                                  </tr>`;
+              })
+              $("#tbody").append(tblBody1);
+        } 
+    });
+    }
+    myfun();
+
+</script>

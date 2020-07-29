@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<head>
+    <title>form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <body>
+      <div id="content">
+        <table class="table table-bordered">
+            <thead id="thead"></thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+        
+        <div id="insert"></div>
+      </div>
+  
+    </body>
+</head>
+</html>
+<script> 
+var id;
+var name;
+    $.ajax({
+         url: "http://localhost:3000/api/students",
+         success: function(result) {
+            var tblBody1;
+              $.each(result,function(k,v){
+                tblBody1 += `<tr>
+                                  <td>${v.id}</td>
+                                  <td>${v.name}</td>
+                                  <td>
+                                   
+                                    <input type="button" value="Update" id="update">
+                                  
+                                   
+                                    <button type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" id="delete">Delete</button>
+                                    
+                                    </td>
+                                  </tr>`;
+              })
+              $("#thead").html(` <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Action</td>
+                </tr>`);
+              $("#tbody").html(tblBody1);
+              $("#insert").html(`<form action="http://localhost:3000/api/students/insert" method="GET">
+          <button type="submit">Insert</button>
+        </form>`);
+        } 
+        
+    });
+    
+    $(document).on('click','#update',function(){
+                 id= $(this).closest('tr').children('td:eq(0)').html();
+                name= $(this).closest('tr').children('td:eq(1)').html();
+                //alert([id,name]);
+                 $.ajax({
+                    url: "http://localhost:3000/api/students/update/",
+                    type:'GET',
+                    data:{ id,name},
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(data) {
+                      $('#content').html(data);
+                    }
+                })
+               
+              })
+              $(document).on('click','#delete',function(){
+                 id= $(this).closest('tr').children('td:eq(0)').html();
+                //alert(id);
+                
+                var con=confirm("Do you want to delete "+id+"?")
+                if( con == true ) {
+                    $.ajax({
+                      url: "http://localhost:3000/api/students/delete/",
+                      type:'GET',
+                      data:{ id},
+                      contentType: 'application/json; charset=utf-8',
+                      success: function(data) {
+                        $('#content').html(data);
+                     
+                      }
+                });
+                  return true;
+                } 
+                else {
+                  
+                  return false;
+                }
+              })
+             
+       
+</script>

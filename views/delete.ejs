@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+    <title>form</title>
+    <body>
+        <form name="f1"  action="/api/students/deletedata" method="POST">
+            <label>Id</label><input type="text" name="id" value="<%= id%>"><br><br>
+            <button type="submit" id="delete">Delete</button>
+        </form>
+    </body>
+    
+</head>
+</html>
+<script>
+    document.forms['f1'].submit();
+</script>
