@@ -1,7 +1,7 @@
 const parser = require('body-parser');
 const{ pool } = require('./models/db');
-// var session = require('express-session');
-// const express=require('express');
+var session = require('express-session');
+const express=require('express');
 const app = new express();
 const register = require('./routes/register');
 
@@ -19,7 +19,6 @@ app.use(express.json());
 app.use(session({secret: "Your secret key", resave: false,
 saveUninitialized: true}));
 app.set('view engine', 'ejs');
-app.set('view engine', 'ejs');
 app.set('views','./views');
 
 app.use('/app',register);
@@ -28,5 +27,3 @@ app.use('/app/users',users);
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => console.log(`Listening on port ${port}...`));
-///------
---------------
